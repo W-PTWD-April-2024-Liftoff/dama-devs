@@ -1,7 +1,13 @@
 package com.launchcode.dama_devs.models;
+
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import jakarta.persistence.Entity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -14,7 +20,18 @@ public class User extends AbstractEntity {
     @NotNull
     private String pwHash;
 
-    public User() {}
+    //user-comment relationship
+    @Getter
+    @OneToMany(mappedBy = "user")
+    private final List<Comment> comments = new ArrayList<>();
+
+    //user-garden relationship
+    @Getter
+    @OneToMany(mappedBy = "user")
+    private final List<Garden> gardens = new ArrayList<>();
+
+    public User() {
+    }
 
     public User(String username, String password) {
         this.username = username;
@@ -29,6 +46,4 @@ public class User extends AbstractEntity {
 
         return username;
     }
-
-
 }
