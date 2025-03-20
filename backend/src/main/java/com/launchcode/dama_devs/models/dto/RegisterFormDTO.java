@@ -1,15 +1,29 @@
 package com.launchcode.dama_devs.models.dto;
 
-public class RegisterFormDTO extends LoginFormDTO{
+import java.util.Set;
 
-    private String verifyPassword;
+import jakarta.validation.constraints.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-    public String getVerifyPassword() {
-        return verifyPassword;
-    }
+@Data
+public class RegisterFormDTO extends LoginFormDTO {
+    @NotBlank
+    @Size(min = 3, max = 20)
+    private String username;
 
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }
+    @NotBlank
+    @Size(max = 50)
+    @Email
+    private String email;
 
+    @Setter
+    @Getter
+    private Set<String> role;
+
+    @NotBlank
+    @Size(min = 6, max = 40)
+    private String password;
+    
 }
