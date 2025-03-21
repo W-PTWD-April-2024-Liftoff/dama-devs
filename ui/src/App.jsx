@@ -1,10 +1,16 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
 import Home from "./components/Home";
 import Dashboard from "./components/Dashboard";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import ExampleOne from './pages/ExampleOne';
+import ExampleTwo from './pages/ExampleTwo';
+import Props from './reusable-code/props';
+import WeatherWidget from './reusable-code/WeatherWidget';
+
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import './App.css';
 import ExampleOne from './pages/ExampleOne';
 import ExampleTwo from './pages/ExampleTwo';
 import Props from './reusable-code/props';
@@ -20,6 +26,11 @@ function App() {
       </Routes>
     </Router>
   );
+
+    <Router>
+      <WeatherWidget />
+      {/* test for using props
+      <Props />      */}
 
     <Router>
       <WeatherWidget />
