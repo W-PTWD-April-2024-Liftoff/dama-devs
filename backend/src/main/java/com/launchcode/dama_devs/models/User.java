@@ -11,6 +11,7 @@ import java.util.List;
 
 
 @Entity
+@Getter
 public class User extends AbstractEntity {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -21,12 +22,10 @@ public class User extends AbstractEntity {
     private String pwHash;
 
     //user-comment relationship
-    @Getter
     @OneToMany(mappedBy = "user")
     private final List<Comment> comments = new ArrayList<>();
 
     //user-garden relationship
-    @Getter
     @OneToMany(mappedBy = "user")
     private final List<Garden> gardens = new ArrayList<>();
 

@@ -13,16 +13,15 @@ import java.util.List;
 
 
 @Entity
+@Getter
 public class Garden extends AbstractEntity {
 
     //garden-plant relationship
-    @Getter
     @ManyToMany
     private final List<Plant> plants = new ArrayList<>();
 
     //garden-user relationship
     @Setter
-    @Getter
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -8,19 +8,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter @Setter
 public class Comment extends AbstractEntity {
 
     //comments - users relationship
-    @Getter
-    @Setter
     @NotNull (message = "A user is required")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     //comments - plants relationship
-    @Getter
-    @Setter
     @NotNull (message = "A plant is required")
     @ManyToOne
     @JoinColumn(name = "plant_id")
