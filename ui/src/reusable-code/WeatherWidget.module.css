@@ -1,0 +1,42 @@
+/* this css will go into the CSS folder or just in css file for the random styling that is not re-usable */
+.weatherWidget {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #6b9080;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .weatherContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .weatherIcon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .city {
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .temp {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .loading {
+    font-size: 12px;
+    text-align: center;
+  }
