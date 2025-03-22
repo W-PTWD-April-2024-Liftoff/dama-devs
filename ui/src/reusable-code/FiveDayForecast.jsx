@@ -4,9 +4,7 @@ import styles from "./Forecast.module.css";
 const Forecast = () => {
   const [city, setCity] = useState("");
   const [forecastData, setForecastData] = useState([]);
-
-  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-
+ 
   const getForecast = async () => {
     if (!city) {
       alert("Please enter a city name or zip code");
@@ -16,9 +14,9 @@ const Forecast = () => {
     try {
       let url;
       if (/^\d{5}$/.test(city)) {  // Checks if input is a 5-digit zip code
-        url = `https://api.openweathermap.org/data/2.5/forecast?zip=${city},US&appid=${apiKey}&units=imperial`;
+        url = `http://localhost:8080/weather/forecast/zip?zip=${city}`;
       } else {
-        url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+        url = `http://localhost:8080/weather/forecast?city=${city}`;
       }
   
       const response = await fetch(url);

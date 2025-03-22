@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { useState, useEffect } from 'react';
-import Dashboard from '../reusable-code/Dashboard';
+import Dashboard from '../reusable-code/DashboardWeather';
 
 function DashboardPage() {
   const navigate = useNavigate();
