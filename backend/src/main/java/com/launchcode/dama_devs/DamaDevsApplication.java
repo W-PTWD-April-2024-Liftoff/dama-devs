@@ -21,7 +21,7 @@ public class DamaDevsApplication implements CommandLineRunner {
     @Override
     public void run(String...args) {
         try {
-            csvToDatabase.insertRecords("backend/src/main/resources/plant_data.csv");
+            csvToDatabase.insertRecords("src/main/resources/plant_data.csv");
 
         } catch (IOException e) {
             e.printStackTrace();
