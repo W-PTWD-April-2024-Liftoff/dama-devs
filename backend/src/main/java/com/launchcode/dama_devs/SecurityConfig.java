@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -17,44 +18,34 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf ->
+                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        /*here we are making use of ignoring request matches method
+                          here all the apis that match the pattern will be ignored for
+                          csrf protection
+                        */
+                        .ignoringRequestMatchers("/api/auth/public/**"));
         http.authorizeHttpRequests(requests ->
                 requests
                         //here giving permissions to everyone to access the endpoint of contact
                         .requestMatchers("/contact").permitAll()
                         //here restricted to admin to access the end point of hello
                         .requestMatchers("/hello").hasRole("ADMIN")
+                        .requestMatchers("/api/csrf-token").permitAll()
                         //here other than the above requests to access you need to authenticate
                         .anyRequest().authenticated());
         http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
-    //    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        if (!manager.userExists("user1")) {
-//            manager.createUser(User.withUsername("user1")
-//                    .password("{noop}password")
-//                    .roles("USER")
-//                    .build()
-//            );
-//        }
-//        if (!manager.userExists("admin")) {
-//            manager.createUser(User.withUsername("admin")
-//                    .password("{noop}password1")
-//                    .roles("ADMIN")
-//                    .build()
-//            );
-//        }
-//        return manager;
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
